@@ -38,6 +38,16 @@ void signalsmith_stretch_set_transpose_factor(signalsmith_stretch_t *handle, flo
 // limit (pass zero for no limit).
 void signalsmith_stretch_set_transpose_factor_semitones(signalsmith_stretch_t *handle, float multiplier, float tonality_limit);
 
+// Set formant shift factor, with an option to compensate for pitch.
+void signalsmith_stretch_set_formant_factor(signalsmith_stretch_t *handle, float multiplier, int compensate_pitch);
+
+// Set formant shift in semitones, with an option to compensate for pitch.
+void signalsmith_stretch_set_formant_factor_semitones(signalsmith_stretch_t *handle, float semitones, int compensate_pitch);
+
+// Rough guesstimate of the fundamental frequency, used for formant analysis. 
+// 0 means attempting to detect the pitch.
+void signalsmith_stretch_set_formant_base(signalsmith_stretch_t *handle, float frequency);
+
 // Processes interleaved input samples and stores the result in the output buffer.
 // The input and output buffers must interleaved, with the correct number of
 // channels. The length arguments refer to the number of frames, i.e. the number

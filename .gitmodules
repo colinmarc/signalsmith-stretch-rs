@@ -1,3 +1,6 @@
 [submodule "signalsmith-stretch"]
 	path = signalsmith-stretch
 	url = https://github.com/Signalsmith-Audio/signalsmith-stretch
+[submodule "signalsmith-linear"]
+	path = signalsmith-linear
+	url = https://github.com/Signalsmith-Audio/linear

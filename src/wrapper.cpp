@@ -95,6 +95,18 @@ void signalsmith_stretch_set_transpose_factor_semitones(signalsmith_stretch_t *h
     handle->instance.setTransposeSemitones(semitones, tonality_limit);
 }
 
+void signalsmith_stretch_set_formant_factor(signalsmith_stretch_t *handle, float multiplier, int compensate_pitch) {
+    handle->instance.setFormantFactor(multiplier, compensate_pitch);
+}
+
+void signalsmith_stretch_set_formant_factor_semitones(signalsmith_stretch_t *handle, float semitones, int compensate_pitch) {
+    handle->instance.setFormantSemitones(semitones, compensate_pitch);
+}
+
+void signalsmith_stretch_set_formant_base(signalsmith_stretch_t *handle, float frequency) {
+    handle->instance.setFormantSemitones(frequency);
+}
+
 void signalsmith_stretch_seek(signalsmith_stretch_t *handle, float *input, size_t input_length, double playback_rate) {
     InterleavedBuffer interleaved(input, handle->channel_count);
     handle->instance.seek(interleaved, input_length, playback_rate);

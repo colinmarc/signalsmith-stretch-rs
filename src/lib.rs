@@ -96,6 +96,39 @@ impl Stretch {
         }
     }
 
+    /// Set formant shift factor, with an option to compensate for pitch.
+    pub fn set_formant_factor(&mut self, multiplier: f32, compensate_pitch: bool) {
+        unsafe {
+            sys::signalsmith_stretch_set_formant_factor(
+                self.inner,
+                multiplier,
+                if compensate_pitch { 1 } else { 0 },
+            )
+        }
+    }
+
+    /// Set formant shift in semitones, with an option to compensate for pitch.
+    pub fn set_formant_factor_semitones(&mut self, semitones: f32, compensate_pitch: bool) {
+        unsafe {
+            sys::signalsmith_stretch_set_formant_factor_semitones(
+                self.inner,
+                semitones,
+                if compensate_pitch { 1 } else { 0 },
+            )
+        }
+    }
+
+    /// Rough guesstimate of the fundamental frequency, used for formant analysis. 
+    /// 0 means attempting to detect the pitch.
+    pub fn signalsmith_stretch_set_formant_base(&self, frequency: f32) {
+        unsafe {
+            sys::signalsmith_stretch_set_formant_base(
+                self.inner,
+                frequency,
+            )
+        }
+    }
+
     /// Add "pre-roll" to the output without affecting the stream position.
     ///
     /// Input samples must be interleaved, with the correct number of channels.

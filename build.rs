@@ -11,6 +11,7 @@ fn main() {
     cc::Build::new()
         .file(src_path.join("wrapper.cpp"))
         .include(Path::new("signalsmith-stretch"))
+        .include(Path::new("."))
         .cpp(true)
         .compile("signalsmith-stretch");
 
