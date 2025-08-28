@@ -2,6 +2,7 @@
 #define SIGNALSMITH_STRETCH_WRAPPER_H
 
 #include <stddef.h>
+#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -55,6 +56,12 @@ void signalsmith_stretch_set_formant_base(signalsmith_stretch_t *handle, float f
 void signalsmith_stretch_process(signalsmith_stretch_t *handle,
                                  float *input, size_t input_length,
                                  float *output, size_t output_length);
+
+
+// Process a complete audio buffer all in one go.
+bool signalsmith_stretch_exact(signalsmith_stretch_t *handle,
+                               float *input, size_t input_length,
+                               float *output, size_t output_length);
 
 // Read the remaining output. `signalsmith_stretch_output_latency` will return
 // the correct size for the output buffer.

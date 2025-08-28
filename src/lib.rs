@@ -118,15 +118,10 @@ impl Stretch {
         }
     }
 
-    /// Rough guesstimate of the fundamental frequency, used for formant analysis. 
+    /// Rough guesstimate of the fundamental frequency, used for formant analysis.
     /// 0 means attempting to detect the pitch.
     pub fn signalsmith_stretch_set_formant_base(&self, frequency: f32) {
-        unsafe {
-            sys::signalsmith_stretch_set_formant_base(
-                self.inner,
-                frequency,
-            )
-        }
+        unsafe { sys::signalsmith_stretch_set_formant_base(self.inner, frequency) }
     }
 
     /// Add "pre-roll" to the output without affecting the stream position.
@@ -168,6 +163,25 @@ impl Stretch {
                 output.as_mut_ptr(),
                 output.len() / self.channel_count,
             );
+        }
+    }
+
+    /// Process a complete audio buffer all in one go.
+    pub fn exact(&mut self, input: impl AsRef<[f32]>, mut output: impl AsMut<[f32]>) -> bool {
+        let input = input.as_ref();
+        let output = output.as_mut();
+
+        debug_assert_eq!(0, input.len() % self.channel_count);
+        debug_assert_eq!(0, output.len() % self.channel_count);
+
+        unsafe {
+            sys::signalsmith_stretch_exact(
+                self.inner,
+                input.as_ptr() as _,
+                input.len() / self.channel_count,
+                output.as_mut_ptr(),
+                output.len() / self.channel_count,
+            )
         }
     }
 
