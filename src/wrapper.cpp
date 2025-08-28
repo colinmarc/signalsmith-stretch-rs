@@ -121,6 +121,15 @@ void signalsmith_stretch_process(signalsmith_stretch_t *handle,
     handle->instance.process(interleavedInput, input_length, interleavedOutput, output_length);
 }
 
+bool signalsmith_stretch_exact(signalsmith_stretch_t *handle,
+                                 float *input, size_t input_length,
+                                 float *output, size_t output_length) {
+    InterleavedBuffer interleavedInput(input, handle->channel_count);
+    InterleavedBuffer interleavedOutput(output, handle->channel_count);
+
+    return handle->instance.exact(interleavedInput, input_length, interleavedOutput, output_length);
+}
+
 void signalsmith_stretch_flush(signalsmith_stretch_t *handle,
                                float *output, size_t output_length) {
     InterleavedBuffer interleavedOutput(output, handle->channel_count);
