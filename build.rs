@@ -12,6 +12,13 @@ fn main() {
         .file(src_path.join("wrapper.cpp"))
         .include(Path::new("signalsmith-stretch"))
         .include(Path::new("."))
+        // wrapper.cpp uses auto -- set a C++ standard usable by
+        // MSVC for consistency
+        .flag_if_supported("-std=c++14")
+        .flag_if_supported("/std:c++14")
+        // wrapper.cpp also uses throwables
+        .flag_if_supported("-fexceptions")
+        .flag_if_supported("/EHs")
         .cpp(true)
         .compile("signalsmith-stretch");
 
