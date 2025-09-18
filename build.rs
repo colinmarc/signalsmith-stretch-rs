@@ -13,6 +13,7 @@ fn main() {
         .include(Path::new("signalsmith-stretch"))
         .include(Path::new("."))
         .cpp(true)
+        .std("c++14")
         .compile("signalsmith-stretch");
 
     let bindings = bindgen::Builder::default()
