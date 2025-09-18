@@ -3,7 +3,6 @@
 #include <signalsmith-stretch.h>
 
 #include <stddef.h>
-#include <vector>
 #include <cstring>
 
 // Allows channel-major indexing into interleaved buffers.
@@ -34,10 +33,6 @@ public:
     };
 
     ChannelView operator[](size_t channel) {
-        if (channel >= static_cast<size_t>(channelCount)) {
-            throw std::out_of_range("Channel index out of range");
-        }
-
         return ChannelView(data, channel, channelCount);
     }
 };
