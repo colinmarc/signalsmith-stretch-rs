@@ -10,7 +10,7 @@ repository = "https://github.com/colinmarc/signalsmith-stretch-rs"
 homepage = "https://github.com/colinmarc/signalsmith-stretch-rs"
 
 [build-dependencies]
-bindgen = "0.70"
+bindgen = "0.73"
 cc = "1"
 
 [dev-dependencies]
